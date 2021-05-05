@@ -1,9 +1,20 @@
 from instabot import Bot
 import random
 import datetime
+import os 
+import csv
+import shutil
+from time import sleep
 
 username = ""
 password = ""
+
+postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
+postExtension = ".JPG"
+
+loggedIn = False
+tag = "#şiir #edebiyat"
+dayCheck = False
 
 bot = Bot()
 
@@ -31,6 +42,7 @@ timesToPost = {
 def bootupSequence():
     print("Enter your username:")
     username = input()
+
     print("Enter your password:")
     password = input()
 
@@ -46,22 +58,90 @@ def whenToPost():
         weekdays[
             datetime.datetime.today().weekday()
             ]
-    ]
+        ]
     hour = random.randint(range[0], range[1])
     minute  = random.randint(0, 60)
-
     return [hour, minute]
+
+def getDay():
+    return datetime.datetime.today().weekday()
+
+def getCurrentTime():
+    now = datetime.datetime.now()
+    return [now.hour, now.minute]
+
+def timeToSeconds(timeArray):
+    return timeArray[0]*60*60 + timeArray[1]*60
+
+def getDate():
+    return str(datetime.datetime.today().date())
 
 def login():
     try:
         bot.login(username = username, password = password)
         print("Successfully logged in.")
+        loggedIn = True
     except:
-        print("An error occured trying to log in. See above for details.")
+        print("An error occured trying to log in. Trying again...")
+        #bootupSequence()
 
 def postImages(image, captionTxt, tags):
-    finalCaption = captionTxt + "  "
+    finalCaption = str(captionTxt) + "  "
     for tag in tags:
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
 
+#def getPostDirectoryForDate(date):
+#    posts = os.listdir("./posts")
+#    date += postExtension
+#    for post in posts:
+#        if date == post:
+#            return os.getcwd() + "/posts/" + post
+            
+def getPostDirectoryForDate(fileName):
+    return os.getcwd() + "/posts/" + fileName
+
+def movePost(date):
+    shutil.move(getPostDirectoryForDate(date), os.getcwd() + "/posted")
+
+def getDescriptionForDate(date, file_name):
+    f = open(file_name, 'r')
+
+    reader = csv.reader(f)
+    for row in reader:
+        if str(date) == row[0]:            
+            return row[1]
+    return 1
+
+while True:
+    if not loggedIn:
+        login()
+    if not dayCheck:
+        date = getDate()
+        postDirectory = getPostDirectoryForDate(str(date)+postExtension)
+        description = getDescriptionForDate(date, "description.csv")
+        whenToPost = whenToPost()
+        dayCheck = True
+    
+    #[hours, mins]
+    currentTime = getCurrentTime()
+    #timeUntilPost = [whenToPost[0] - currentTime[0], whenToPost[1] - currentTime[1]]
+    timeUntilPost = [0, 0]
+
+    sleep(timeToSeconds(timeUntilPost))
+    postImages(postDirectory,description,tag)
+    movePost(str(date)+postExtension)
+
+    currentTime = getCurrentTime()
+    timeUntilNextDay = [24-currentTime[0], 60 - currentTime[1]]
+
+    sleep(timeToSeconds(timeUntilNextDay))
+    dayCheck = False
+
+    #sabah variableları hesaplıcak | done
+    #post saatini belirleyecek | done
+    #post saatine kadar sleep atacak | done
+    #sleep sonrası postu atacak | done
+    #post validation yapacak (lüks) | 
+    #ertesi güne kadar saati hesaplayıp sleep atsın
+    # sleep bitince yeni saati alıp resetlesin (data driftini önlemek için)t
