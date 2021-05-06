@@ -6,14 +6,14 @@ import csv
 import shutil
 from time import sleep
 
-username = ""
-password = ""
+username = "yanki.kirlikova@gmail.com"
+password = "burakedebiyat"
 
 postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
 postExtension = ".JPG"
 
 loggedIn = False
-tag = "#şiir #edebiyat"
+tag = ["#şiir", "#edebiyat", "#şair", "#cemalsüreya", "#canyücel", "#turkiye", "#128milyarnerede", "#huzur", "#mutluluk"]
 dayCheck = False
 
 bot = Bot()
@@ -86,7 +86,7 @@ def login():
         #bootupSequence()
 
 def postImages(image, captionTxt, tags):
-    finalCaption = str(captionTxt) + "  "
+    finalCaption = str(captionTxt) + "         "
     for tag in tags:
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
@@ -109,7 +109,8 @@ def getDescriptionForDate(date, file_name):
 
     reader = csv.reader(f)
     for row in reader:
-        if str(date) == row[0]:            
+        if str(date) == row[0]:
+            print(row[1])
             return row[1]
     return 1
 
@@ -125,12 +126,13 @@ while True:
     
     #[hours, mins]
     currentTime = getCurrentTime()
-    #timeUntilPost = [whenToPost[0] - currentTime[0], whenToPost[1] - currentTime[1]]
-    timeUntilPost = [0, 0]
+    timeUntilPost = [whenToPost[0] - currentTime[0], whenToPost[1] - currentTime[1]]
+    print("Time Until Post", timeUntilPost)
+    #timeUntilPost = [0, 0]
 
     sleep(timeToSeconds(timeUntilPost))
     postImages(postDirectory,description,tag)
-    movePost(str(date)+postExtension)
+    #movePost(str(date)+postExtension)
 
     currentTime = getCurrentTime()
     timeUntilNextDay = [24-currentTime[0], 60 - currentTime[1]]
@@ -144,4 +146,4 @@ while True:
     #sleep sonrası postu atacak | done
     #post validation yapacak (lüks) | 
     #ertesi güne kadar saati hesaplayıp sleep atsın
-    # sleep bitince yeni saati alıp resetlesin (data driftini önlemek için)t
+    # sleep bitince yeni saati alıp resetlesin (data driftini önlemek için)
