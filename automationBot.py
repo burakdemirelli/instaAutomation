@@ -13,7 +13,7 @@ postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
 postExtension = ".jpg"
 
 loggedIn = False
-tag = ["#şiir", "#edebiyat", "#şair", "#cemalsüreya", "#canyücel", "ozdemirasaf", "şiirsokakta", "#turkiye", "#istanbul"]
+tag = ["#siir", "#edebiyat", "#sair", "#cemalsureya", "#canyucel", "ozdemirasaf", "siirsokakta", "#turkiye", "#istanbul"]
 dayCheck = False
 
 bot = Bot()
