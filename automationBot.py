@@ -6,14 +6,14 @@ import csv
 import shutil
 from time import sleep
 
-username = ""
-password = ""
+username = "yanki.kirlikova@gmail.com"
+password = "burakedebiyat"
 
 postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
-postExtension = ".JPG"
+postExtension = ".jpg"
 
 loggedIn = False
-tag = ["#şiir", "#edebiyat", "#şair", "#cemalsüreya", "#canyücel", "#turkiye", "#128milyarnerede", "#huzur", "#mutluluk"]
+tag = ["#şiir", "#edebiyat", "#şair", "#cemalsüreya", "#canyücel", "ozdemirasaf", "şiirsokakta", "#turkiye", "#istanbul"]
 dayCheck = False
 
 bot = Bot()
@@ -86,7 +86,7 @@ def login():
         #bootupSequence()
 
 def postImages(image, captionTxt, tags):
-    finalCaption = str(captionTxt) + "         "
+    finalCaption = str(captionTxt) + "                            "
     for tag in tags:
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
