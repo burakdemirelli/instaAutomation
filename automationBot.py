@@ -6,8 +6,8 @@ import csv
 import shutil
 from time import sleep
 
-username = "yanki.kirlikova@gmail.com"
-password = "burakedebiyat"
+username = ""
+password = ""
 
 postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
 postExtension = ".JPG"
