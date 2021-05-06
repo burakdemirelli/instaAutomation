@@ -126,6 +126,7 @@ while True:
     
     #[hours, mins]
     currentTime = getCurrentTime()
+    print(currentTime)
     timeUntilPost = [whenToPost[0] - currentTime[0], whenToPost[1] - currentTime[1]]
     print("Time Until Post", timeUntilPost)
     #timeUntilPost = [0, 0]
