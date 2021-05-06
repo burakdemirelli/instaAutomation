@@ -140,10 +140,4 @@ while True:
     sleep(timeToSeconds(timeUntilNextDay))
     dayCheck = False
 
-    #sabah variableları hesaplıcak | done
-    #post saatini belirleyecek | done
-    #post saatine kadar sleep atacak | done
-    #sleep sonrası postu atacak | done
-    #post validation yapacak (lüks) | 
-    #ertesi güne kadar saati hesaplayıp sleep atsın
-    # sleep bitince yeni saati alıp resetlesin (data driftini önlemek için)
+    
