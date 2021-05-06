@@ -68,7 +68,7 @@ def getDay():
 
 def getCurrentTime():
     now = datetime.datetime.now()
-    return [now.hour, now.minute]
+    return [now.hour, 0]
 
 def timeToSeconds(timeArray):
     return timeArray[0]*60*60 + timeArray[1]*60
