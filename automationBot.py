@@ -86,6 +86,7 @@ def login():
         #bootupSequence()
 
 def postImages(image, captionTxt, tags):
+    login()
     finalCaption = str(captionTxt) + "                            "
     for tag in tags:
         finalCaption += " " + tag
@@ -115,8 +116,6 @@ def getDescriptionForDate(date, file_name):
     return 1
 
 while True:
-    if not loggedIn:
-        login()
     if not dayCheck:
         date = getDate()
         postDirectory = getPostDirectoryForDate(str(date)+postExtension)
