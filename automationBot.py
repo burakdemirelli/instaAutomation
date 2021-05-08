@@ -91,6 +91,7 @@ def postImages(image, captionTxt, tags):
     for tag in tags:
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
+    bot.logout()
 
 #def getPostDirectoryForDate(date):
 #    posts = os.listdir("./posts")
@@ -129,8 +130,8 @@ while True:
     timeUntilPost = [whenToPost[0] - currentTime[0], whenToPost[1] - currentTime[1]]
     print("Time Until Post", timeUntilPost)
     #timeUntilPost = [0, 0]
-
-    sleep(timeToSeconds(timeUntilPost))
+    if (timeToSeconds(timeUntilPost)) >= 0:
+        sleep(timeToSeconds(timeUntilPost))
     postImages(postDirectory,description,tag)
     #movePost(str(date)+postExtension)
 
