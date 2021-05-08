@@ -13,7 +13,7 @@ postsPath = "/Users/burakdemirelli/Documents/python/AutomationBot"
 postExtension = ".jpg"
 
 loggedIn = False
-tag = ["#siir", "#edebiyat", "#sair", "#cemalsureya", "#canyucel", "ozdemirasaf", "siirsokakta", "#turkiye", "#istanbul"]
+tag = ["#siir", "#edebiyat", "#sair", "#cemalsureya", "#canyucel", "#ozdemirasaf", "#siirsokakta", "#turkiye", "#istanbul"]
 dayCheck = False
 
 bot = Bot()
@@ -136,7 +136,8 @@ while True:
     #movePost(str(date)+postExtension)
 
     currentTime = getCurrentTime()
-    timeUntilNextDay = [24-currentTime[0], 60 - currentTime[1]]
+    timeUntilNextDay = [23-currentTime[0], 60 - currentTime[1]]
+    print(timeUntilNextDay)
 
     sleep(timeToSeconds(timeUntilNextDay))
     dayCheck = False
