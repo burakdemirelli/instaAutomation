@@ -92,7 +92,7 @@ def postImages(image, captionTxt, tags):
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
     bot.logout()
-    os.system("rm -rf config")
+    os.system("sudo rm -rf config")
 
 def getPostDirectoryForDate(fileName):
     return os.getcwd() + "/posts/" + fileName
