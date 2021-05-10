@@ -92,14 +92,8 @@ def postImages(image, captionTxt, tags):
         finalCaption += " " + tag
     bot.upload_photo(image, finalCaption)
     bot.logout()
+    os.system("rm -rf config")
 
-#def getPostDirectoryForDate(date):
-#    posts = os.listdir("./posts")
-#    date += postExtension
-#    for post in posts:
-#        if date == post:
-#            return os.getcwd() + "/posts/" + post
-            
 def getPostDirectoryForDate(fileName):
     return os.getcwd() + "/posts/" + fileName
 
